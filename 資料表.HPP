@@ -3,14 +3,16 @@
 #include <cstdlib>
 #include <string>
 #include <ctime>
-#include <unordered_map>
 #include <vector>
+
+#include "機器學習公共.HPP"
 
 class 類別_資料表
 {
 public:
 	std::vector<double*> 資料;
 	unsigned __int64 欄數 = 0;
+	unsigned __int64 列數 = 0;
 
 	virtual ~類別_資料表()
 	{
@@ -84,15 +86,16 @@ public:
 		}
 
 	讀取結束:
+		丶資料表->列數 = 丶資料表->資料.size();
 		delete[] 丶字串;
 		fclose(丶檔案);
 		return 丶資料表;
 	}
 
-	class 類別_資料表異常 : std::exception
+	class 類別_資料表異常 : 類別_異常
 	{
 	public:
-		類別_資料表異常(std::wstring 異常字串) : exception(std::string(異常字串.begin(), 異常字串.end()).c_str())
+		類別_資料表異常(unsigned __int16* 異) : 類別_異常(異)
 		{
 
 		}
