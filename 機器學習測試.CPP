@@ -1,23 +1,13 @@
 #include <cstdio>
 #include <cstdlib>
-#include <fstream>
 #include <iostream>
+#include <fstream>
 #include <cmath>
 
 #include "機器學習.HPP"
 #include "資料表.HPP"
 #include "梯度提升.HPP"
 #include "評價.HPP"
-
-void 顯視時間(std::wstring 字串)
-{
-	unsigned __int16 丶時間字串[256];
-	auto 時間 = time(0);
-	tm 時間甲;
-	localtime_s(&時間甲, &時間);
-	wcsftime(丶時間字串, sizeof(丶時間字串), L"%H:%M:%S ", &時間甲);
-	std::wcout << 丶時間字串 << " " << 字串 << std::endl;
-}
 
 int wmain()
 {
@@ -26,19 +16,19 @@ int wmain()
 	try
 	{
 		unsigned __int16 丶字串[256];
-		顯視時間(L"程式開始執行！");
+		類別_機器學習::顯視時間(L"程式開始執行！\n");
 
 		auto 丶訓練資料表 = 類別_資料表::閱讀資料(L"train.csv");
-		swprintf_s(丶字串, 256, L"已讀入%lld列%lld欄資料！", 丶訓練資料表->列數, 丶訓練資料表->欄數);
-		顯視時間(丶字串);
+		swprintf_s(丶字串, 256, L"已讀入%lld列%lld欄資料！\n", 丶訓練資料表->列數, 丶訓練資料表->欄數);
+		類別_機器學習::顯視時間(丶字串);
 
 		auto 丶測試資料表 = 類別_資料表::閱讀資料(L"test.csv");
-		swprintf_s(丶字串, 256, L"已讀入%lld列%lld欄資料！", 丶測試資料表->列數, 丶測試資料表->欄數);
-		顯視時間(丶字串);
+		swprintf_s(丶字串, 256, L"已讀入%lld列%lld欄資料！\n", 丶測試資料表->列數, 丶測試資料表->欄數);
+		類別_機器學習::顯視時間(丶字串);
 
 		auto 丶參照資料表 = 類別_資料表::閱讀資料(L"reference.csv");
-		swprintf_s(丶字串, 256, L"已讀入%lld列%lld欄資料！", 丶參照資料表->列數, 丶參照資料表->欄數);
-		顯視時間(丶字串);
+		swprintf_s(丶字串, 256, L"已讀入%lld列%lld欄資料！\n", 丶參照資料表->列數, 丶參照資料表->欄數);
+		類別_機器學習::顯視時間(丶字串);
 
 
 		auto 丶特征陣列 = new unsigned __int64[丶訓練資料表->欄數 - 2];
@@ -50,9 +40,9 @@ int wmain()
 			丶標籤值陣列[甲] = 丶訓練資料表->資料[甲][257];
 
 		類別_梯度提升模型 模型;
-		顯視時間(L"決策樹訓練開始！");
+		類別_機器學習::顯視時間(L"決策樹訓練開始！\n");
 		模型.訓練(丶訓練資料表, 丶標籤值陣列, 丶特征陣列, 255, 50, 0.1, 10, 0.01, 512, 0, 1);
-		顯視時間(L"決策樹訓練結束！");
+		類別_機器學習::顯視時間(L"決策樹訓練結束！\n");
 		delete[] 丶特征陣列;
 		delete[] 丶標籤值陣列;
 
